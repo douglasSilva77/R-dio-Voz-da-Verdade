@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      // Early error handler to catch module loading errors
+      window.onerror = function(msg, url, line, col, error) {
+        console.error("Early error caught:", msg, url, line, col, error);
+        var root = document.getElementById('root');
+        if (root) {
+          root.innerHTML = '<div style="padding: 40px; color: white; background: #09090b; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; font-family: sans-serif;">' +
+            '<h1 style="color: #ef4444; margin-bottom: 16px;">Erro Crítico de Carregamento</h1>' +
+            '<p style="color: #a1a1aa; margin-bottom: 24px;">Não foi possível iniciar o aplicativo. Isso pode ser um erro de conexão ou um problema no código.</p>' +
+            '<div style="background: #18181b; padding: 16px; border-radius: 8px; font-size: 12px; color: #f4f4f5; max-width: 100%; overflow: auto; text-align: left;">' +
+            '<p><strong>Mensagem:</strong> ' + msg + '</p>' +
+            '<p><strong>Arquivo:</strong> ' + url + '</p>' +
+            '</div>' +
+            '<button onclick="window.location.reload()" style="margin-top: 24px; padding: 12px 24px; background: #D4AF37; color: #09090b; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">Tentar Novamente</button>' +
+            '</div>';
+        }
+      };
+    </script>
+    <style>
+      html, body {
+        background-color: #09090b;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+    <meta name="theme-color" content="#09090b" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Shekinah Fm" />
+    <link rel="apple-touch-icon" href="/api/logo" />
+    <link rel="manifest" href="/manifest.json" />
+    <title>Shekinah Fm | Ao Vivo</title>
+  </head>
+  <body>
+    <div id="root">
+      <div style="padding: 40px; color: white; background: #09090b; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; font-family: sans-serif;">
+        <h1 style="color: #D4AF37; margin-bottom: 16px;">Iniciando...</h1>
+        <p style="color: #a1a1aa;">Aguarde enquanto carregamos a rádio.</p>
+      </div>
+    </div>
+    <script type="module" src="/src/main.tsx"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then(registration => console.log('SW registered:', registration))
+            .catch(error => console.log('SW registration failed:', error));
+        });
+      }
+    </script>
+  </body>
+</html>
+

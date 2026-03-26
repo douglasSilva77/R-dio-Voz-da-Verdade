@@ -1,0 +1,25 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;600;800&display=swap');
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Outfit", sans-serif;
+  --color-brand: var(--brand-color, #3B82F6);
+}
+
+body {
+  @apply bg-zinc-950 text-zinc-100 font-sans antialiased overflow-x-hidden;
+}
+
+/* Optional: Center the app on desktop to feel more like a mobile app */
+@media (min-width: 1024px) {
+  #root {
+    max-width: 480px;
+    margin: 0 auto;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+    min-height: 100vh;
+    position: relative;
+    border-left: 1px solid rgba(255, 255, 255, 0.05);
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+  }
+}
